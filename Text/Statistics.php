@@ -1,24 +1,24 @@
 <?php
 /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | PHP version 4ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | PHP version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2002 The PHP GroupÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,ÊÊÊÊÊÊÊ|
-// | that is bundled with this package in the file LICENSE, and isÊÊÊÊÊÊÊÊ|
-// | available at through the world-wide-web atÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
-// | http://www.php.net/license/2_02.txt.ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
-// | If you did not receive a copy of the PHP license and are unable toÊÊÊ|
-// | obtain it through the world-wide-web, please send a note toÊÊÊÊÊÊÊÊÊÊ|
-// | license@php.net so we can mail you a copy immediately.ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | This source file is subject to version 2.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available at through the world-wide-web at                           |
+// | http://www.php.net/license/2_02.txt.                                 |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 // | Author: George Schlossnagle <george@omniti.com>                      |
 // +----------------------------------------------------------------------+
 //
 // $Id$
 
-/*
+/**
  * Text_Statistics calculates some basic readability metrics on a 
  * block of text.  The number of words, the number of sentences,
  * and the number of total syllables is counted.  These statistics
@@ -49,8 +49,9 @@
 
 require_once "Text/Word.php";
 
-class Text_Statistics {
-    /*
+class Text_Statistics
+{
+    /**
      * The document text.
      *
      * @var string
@@ -58,7 +59,7 @@ class Text_Statistics {
      */
     var $text = '';
 
-    /*
+    /**
      * The number of syllables in the document.
      *
      * @var number
@@ -66,7 +67,7 @@ class Text_Statistics {
      */
     var $numSyllables = 0;
 
-    /*
+    /**
      * The number of words in the document.
      *
      * @var number
@@ -74,35 +75,35 @@ class Text_Statistics {
      */
     var $numWords = 0;
 
-    /*
+    /**
      * The number of unique words in the document.
      *
-     * @var number
+     * @var    number
      * @access public
      */
     var $uniqWords = 0;
 
-    /*
+    /**
      * The number of sentences in the document.
      *
-     * @var number
+     * @var    number
      * @access public
      */
     var $numSentences = 0;
 
-    /*
+    /**
      * The Flesch score of the document.
      *
-     * @var number
+     * @var    number
      * @access public
      */
     var $flesch = 0;
 
-    /*
+    /**
      * Some abbreviations we should expand.  THis list could/should
      * be much larger.
      *
-     * @var number
+     * @var    number
      * @access protected
      */
     var $_abbreviations = array('/Mr\./'   => 'Misterr',
@@ -111,10 +112,10 @@ class Text_Statistics {
                                 '/Dr\./i'  => 'Doctor',
                                );
 
-    /*
+    /**
      * Constructor.
      *
-     * @param string
+     * @param  string
      * @access public
      */
     function Text_Statistics($block) 
@@ -123,7 +124,7 @@ class Text_Statistics {
         $this->_analyze();
     }
 
-    /*
+    /**
      * Compute statistics for the document object.
      *
      * @access protected
@@ -139,10 +140,10 @@ class Text_Statistics {
             (84.6 * ($this->numSyllables/$this->numWords));
     } 
 
-    /*
+    /**
      * Helper function, computes statistics on a given line.
      *
-     * @param string
+     * @param  string
      * @access protected
      */
     function _analyze_line($line) 

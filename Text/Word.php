@@ -1,24 +1,24 @@
 <?php
 /* vim: set expandtab tabstop=4 softtabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | PHP version 4ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | PHP version 4                                                        |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2002 The PHP GroupÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,ÊÊÊÊÊÊÊ|
-// | that is bundled with this package in the file LICENSE, and isÊÊÊÊÊÊÊÊ|
-// | available at through the world-wide-web atÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
-// | http://www.php.net/license/2_02.txt.ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
-// | If you did not receive a copy of the PHP license and are unable toÊÊÊ|
-// | obtain it through the world-wide-web, please send a note toÊÊÊÊÊÊÊÊÊÊ|
-// | license@php.net so we can mail you a copy immediately.ÊÊÊÊÊÊÊÊÊÊÊÊÊÊÊ|
+// | This source file is subject to version 2.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available at through the world-wide-web at                           |
+// | http://www.php.net/license/2_02.txt.                                 |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Author: George Schlossnagle <george@omniti.com>                      | 
+// | Author: George Schlossnagle <george@omniti.com>                      |
 // +----------------------------------------------------------------------+
 //
 // $Id$
 
-/*
+/**
  * Text_Word calculates the number of syllables in a word, based off of
  * the number of contiguous vowel groupings in the word and applying
  * matches to detect special cases.
@@ -28,30 +28,32 @@
  * $word->numSyllables();  // returns 1
  *
  * @package Text_Word
- * @author George Schlossnagle <george@omniti.com>
+ * @author  George Schlossnagle <george@omniti.com>
  */
-
-
-class Text_Word {
-    /* The word 
+class Text_Word
+{
+    /**
+     * The word 
      *
-     * @var string
+     * @var    string
      * @access public
      */
     var $word;
 
-    /* The number of syllables.  This is internal, the value should be 
+    /**
+     * The number of syllables.  This is internal, the value should be 
      * accessed through the accessor.
      *
-     * @var number
+     * @var    number
      * @access protected
      */
     var $_numSyllables = 0;
 
-    /* The special cases of fragments which detect as 1 but should be 2
+    /**
+     * The special cases of fragments which detect as 1 but should be 2
      * syllables.
      *
-     * @var array
+     * @var    array
      * @access static protected
      */
     var $doubleSyllables = array('/\wlien/', // alien but not lien
@@ -59,10 +61,11 @@ class Text_Word {
                                  '/io/',    // biography
                                  );
 
-    /* The special cases of fragments which detect as 2 but should be 1
+    /**
+     * The special cases of fragments which detect as 2 but should be 1
      * syllables.
      *
-     * @var array
+     * @var    array
      * @access static protected
      */
     var $silentSyllables = array('/\wely$/',    // absolutely but not ely
@@ -70,7 +73,7 @@ class Text_Word {
                                  '/iou/',
                                 );
     
-    /*
+    /**
      * Constructs a word by name.
      *
      * @param  string
@@ -81,7 +84,7 @@ class Text_Word {
         $this->word = $name;
     }
 
-    /*
+    /**
      * Helper function, canocalizes the word.
      *
      * @param  string
@@ -97,7 +100,7 @@ class Text_Word {
         return $scratch;
     }
 
-    /*
+    /**
      * Helper function, counts syllable exceptions
      *
      * @param  string
@@ -124,7 +127,7 @@ class Text_Word {
         return $mod;
     }
 
-    /*
+    /**
      * Returns the number of syllables.  Caches the value in the object.
      *
      * @access public
