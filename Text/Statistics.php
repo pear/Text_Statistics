@@ -20,35 +20,6 @@
 
 require_once "Text/Word.php";
 
-
-/**
-*  Text_Statistics calculates some basic readability metrics on a 
-*  block of text.  The number of words, the number of sentences,
-*  and the number of total syllables is counted.  These statistics
-*  can be used to calculate the Flesch score for a sentence, which
-*  is  a number (usually between 0 and 100) that represents the 
-*  readability of the text.  A basic breakdown of scores is:
-*
-*  90 to 100  5th grade
-*  80 to 90   6th grade
-*  70 to 80   7th grade
-*  60 to 70   8th and 9th grade
-*  50 to 60   10th to 12th grade (high school)
-*  30 to 50   college
-*  0 to 30    college graduate
-*
-*  More info can be read up on at 
-*  http://www.mang.canterbury.ac.nz/courseinfo/AcademicWriting/Flesch.htm
-*
-*  require 'Text/Statistics.php';
-*  $block = Text_Statistics($sometext);
-*  $block->flesch; // returns flesch score for $sometext
-*
-*  see the unit tests for additional examples.
-*
-*  @package Text_Statistics
-*  @author  George Schlossnagle <george@omniti.com>
-*/
 /**
 *  Text_Statistics calculates some basic readability metrics on a 
 *  block of text.  The number of words, the number of sentences,
