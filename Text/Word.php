@@ -27,7 +27,7 @@
  * $word = new Text_Word('word');
  * $word->numSyllables();  // returns 1
  *
- * @package Text_Word
+ * @package Text_Statistics
  * @author  George Schlossnagle <george@omniti.com>
  */
 class Text_Word
@@ -147,7 +147,7 @@ class Text_Word
         if(!$fragments[0]) {
             array_shift($fragments);
         }
-        if(!$fragments[count($fragments) - 1]) {
+        if($fragments && !$fragments[count($fragments) - 1]) {
             array_pop($fragments);
         }
 

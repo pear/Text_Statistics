@@ -18,44 +18,72 @@
 //
 // $Id$
 
-/**
- * Text_Statistics calculates some basic readability metrics on a 
- * block of text.  The number of words, the number of sentences,
- * and the number of total syllables is counted.  These statistics
- * can be used to calculate the Flesch score for a sentence, which
- * is  a number (usually between 0 and 100) that represents the 
- * readability of the text.  A basic breakdown of scores is:
- *
- * 90 to 100  5th grade
- * 80 to 90   6th grade
- * 70 to 80   7th grade
- * 60 to 70   8th and 9th grade
- * 50 to 60   10th to 12th grade (high school)
- * 30 to 50   college
- * 0 to 30    college graduate
- *
- * More info can be read up on at 
- * http://www.mang.canterbury.ac.nz/courseinfo/AcademicWriting/Flesch.htm
- *
- * require 'Text/Statistics.php';
- * $block = Text_Statistics($sometext);
- * $block->flesch; // returns flesch score for $sometext
- *
- * see the unit tests for additional examples.
- *
- * @package Text_Statistics
- * @author  George Schlossnagle <george@omniti.com>
- */
-
 require_once "Text/Word.php";
 
+
+/**
+*  Text_Statistics calculates some basic readability metrics on a 
+*  block of text.  The number of words, the number of sentences,
+*  and the number of total syllables is counted.  These statistics
+*  can be used to calculate the Flesch score for a sentence, which
+*  is  a number (usually between 0 and 100) that represents the 
+*  readability of the text.  A basic breakdown of scores is:
+*
+*  90 to 100  5th grade
+*  80 to 90   6th grade
+*  70 to 80   7th grade
+*  60 to 70   8th and 9th grade
+*  50 to 60   10th to 12th grade (high school)
+*  30 to 50   college
+*  0 to 30    college graduate
+*
+*  More info can be read up on at 
+*  http://www.mang.canterbury.ac.nz/courseinfo/AcademicWriting/Flesch.htm
+*
+*  require 'Text/Statistics.php';
+*  $block = Text_Statistics($sometext);
+*  $block->flesch; // returns flesch score for $sometext
+*
+*  see the unit tests for additional examples.
+*
+*  @package Text_Statistics
+*  @author  George Schlossnagle <george@omniti.com>
+*/
+/**
+*  Text_Statistics calculates some basic readability metrics on a 
+*  block of text.  The number of words, the number of sentences,
+*  and the number of total syllables is counted.  These statistics
+*  can be used to calculate the Flesch score for a sentence, which
+*  is  a number (usually between 0 and 100) that represents the 
+*  readability of the text.  A basic breakdown of scores is:
+*
+*  90 to 100  5th grade
+*  80 to 90   6th grade
+*  70 to 80   7th grade
+*  60 to 70   8th and 9th grade
+*  50 to 60   10th to 12th grade (high school)
+*  30 to 50   college
+*  0 to 30    college graduate
+*
+*  More info can be read up on at 
+*  http://www.mang.canterbury.ac.nz/courseinfo/AcademicWriting/Flesch.htm
+*
+*  require 'Text/Statistics.php';
+*  $block = Text_Statistics($sometext);
+*  $block->flesch; // returns flesch score for $sometext
+*
+*  see the unit tests for additional examples.
+*
+*  @package Text_Statistics
+*  @author  George Schlossnagle <george@omniti.com>
+*/
 class Text_Statistics
 {
     /**
      * The document text.
      *
-     * @var string
      * @access public
+     * @var string
      */
     var $text = '';
 
@@ -122,8 +150,9 @@ class Text_Statistics
      */
     function Text_Statistics($block) 
     {
-        $this->text = $block;
+        $this->text = trim($block);
         $this->_analyze();
+        $this->text = null;
     }
 
     /**
@@ -159,7 +188,12 @@ class Text_Statistics
     {
         // char frequencies
         $this->_charFreq = count_chars($this->text);
-        $lines = explode("\n", $this->text);
+        $this->text = preg_replace(array_keys($this->_abbreviations),
+                      array_values($this->_abbreviations),
+                      $this->text);
+        preg_match_all('/[.!?](\s|$)/', $this->text, $matches);
+        $this->numSentences = count($matches[0]);
+        $lines              = explode("\n", $this->text);
         // Set ourselves as 'out of text block to start
         $intext = 0;
         foreach( $lines as $line ) {
@@ -176,7 +210,7 @@ class Text_Statistics
             }
             $this->_analyze_line($line);
         }
-        $this->flesch = 206.835 - 
+        $this->flesch     = 206.835 - 
             (1.015 * ($this->numWords/$this->numSentences)) -
             (84.6 * ($this->numSyllables/$this->numWords));
     } 
@@ -190,19 +224,17 @@ class Text_Statistics
     function _analyze_line($line) 
     {
         // expand abbreviations for counting syllables
-        $line = preg_replace(array_keys($this->_abbreviations), 
-                 array_values($this->_abbreviations),
-                 $line);
         preg_match_all("/\b(\w[\w'-]*)\b/", $line, $words);
         foreach( $words[1] as $word ) {
             $w_obj = new Text_Word($word);
             $this->numSyllables += $w_obj->numSyllables();
             $this->numWords++;
-            if($this->_uniques[strtolower($word)]++ == 0) {
+            if(!isset($this->_uniques[$word])) 
+                $this->_uniques[$word] = 1;
+            } else {
                $this->uniqWords++;
             }
         }
-        preg_match_all("/[.!?]/", $line, $matches);
         $this->numSentences += count($matches[0]);
     }
 }
