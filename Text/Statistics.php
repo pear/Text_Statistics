@@ -106,10 +106,12 @@ class Text_Statistics
      * @var    number
      * @access protected
      */
-    var $_abbreviations = array('/Mr\./'   => 'Misterr',
+    var $_abbreviations = array('/Mr\./'   => 'Mister',
                                 '/Mrs\./i' => 'Misses', // Phonetic
                                 '/etc\./i' => 'etcetera',
                                 '/Dr\./i'  => 'Doctor',
+                                '/Jr\./i' => 'Junior',
+                                '/Sr\./i' => 'Senior',
                                );
 
     /**
@@ -125,14 +127,53 @@ class Text_Statistics
     }
 
     /**
+     * Returns the character frequencies.
+     *
+     * @return array of frequencies, where the index is the ASCII byte char value
+     * @access public
+     * @author Jesus M. Castagnetto <jmcastagnetto@php.net>
+     */
+    function getCharFreq() {
+        return $this->_charFreq;
+    }
+
+    /**
+     * Returns the number of paragaphs.
+     * Paragraphs are defined as chunks of text separated by
+     * and empty line.
+     *
+     * @return long
+     * @access public
+     * @author Jesus M. Castagnetto <jmcastagnetto@php.net>
+     */
+    function getNumParagraphs() {
+        return $this->_numParas;
+    }
+
+    /**
      * Compute statistics for the document object.
      *
      * @access protected
      */
     function _analyze() 
     {
+        // char frequencies
+        $this->_charFreq = count_chars($this->text);
         $lines = explode("\n", $this->text);
+        // Set ourselves as 'out of text block to start
+        $intext = 0;
         foreach( $lines as $line ) {
+            // A paragraph is when we enter a text line
+            // after a line that was all whitespace
+            if(preg_match("/\S/", $line)) {
+                if($intext == 0) {
+                    $this->_numParas++;
+                    $intext = 1;
+                }
+            }
+            else {
+                $intext = 0;
+            }
             $this->_analyze_line($line);
         }
         $this->flesch = 206.835 - 
