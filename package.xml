@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+<package version="1.0">
+  <name>Text_Statistics</name>
+  <summary>
+    Compute readability indexes for documents.
+  </summary>
+  <description>
+    Text_Statistics allows for computation of readability indexes for
+    text documents.
+  </description>
+  <maintainers>
+    <maintainer>
+      <user>gschlossnagle</user>
+      <name>George Schlossnagle</name>
+      <email>george@omniti.com</email>
+    </maintainer>
+  </maintainers>
+  <license>PHP License</license>
+  <release>
+    <version>1.0</version>
+    <state>stable</state>
+    <date>2003-02-01</date>
+    <notes>
+<![CDATA[
+First release.
+]]>
+    </notes>
+  </release>
+  <filelist>
+    <dir name="Text">
+      <file role="php" name="Statistics.php"/>
+      <file role="php" name="Word.php"/>
+    </dir>
+    <dir name="tests">
+      <file role="test" name="Statistics.phpt"/>
+      <file role="test" name="Word.phpt"/>
+    </dir>
+  </filelist>
+  <changelog>
+    <release>
+      <version>1.0</version>
+      <date>2003-02-01</date>
+      <notes>
+  <![CDATA[
+  First release.
+  ]]>
+      </notes>
+    </release>
+  </changelog>
+</package>
