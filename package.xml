@@ -30,6 +30,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
 
  <notes>
   * Fixed Bug #4492: Undefined index for each new word
+  * Fixed Bug #4490: Divide by zero error
  </notes>
 
  <contents>

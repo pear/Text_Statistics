@@ -92,6 +92,7 @@ class Text_Statistics
 
     /**
      * The Flesch score of the document.
+     * It is FALSE if there were no words in the document.
      *
      * @var    number
      * @access public
@@ -195,6 +196,15 @@ class Text_Statistics
             }
             $this->_analyze_line($line);
         }
+
+        if ($this->numSentences == 0) {
+            $this->numSentences = 1;
+        }
+        if ($this->numWords == 0) {
+            $this->flesch = false;
+            return;
+        }
+
         $this->flesch     = 206.835 -
             (1.015 * ($this->numWords/$this->numSentences)) -
             (84.6 * ($this->numSyllables/$this->numWords));
