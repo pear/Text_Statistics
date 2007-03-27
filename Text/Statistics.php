@@ -21,11 +21,11 @@
 require_once "Text/Word.php";
 
 /**
-*  Text_Statistics calculates some basic readability metrics on a 
+*  Text_Statistics calculates some basic readability metrics on a
 *  block of text.  The number of words, the number of sentences,
 *  and the number of total syllables is counted.  These statistics
 *  can be used to calculate the Flesch score for a sentence, which
-*  is  a number (usually between 0 and 100) that represents the 
+*  is  a number (usually between 0 and 100) that represents the
 *  readability of the text.  A basic breakdown of scores is:
 *
 *  90 to 100  5th grade
@@ -36,7 +36,7 @@ require_once "Text/Word.php";
 *  30 to 50   college
 *  0 to 30    college graduate
 *
-*  More info can be read up on at 
+*  More info can be read up on at
 *  http://www.mang.canterbury.ac.nz/courseinfo/AcademicWriting/Flesch.htm
 *
 *  require 'Text/Statistics.php';
@@ -114,17 +114,27 @@ class Text_Statistics
                                );
 
     /**
+     * List of all words that have been found already.
+     * @var array
+     */
+    var $_uniques = array();
+
+
+
+    /**
      * Constructor.
      *
      * @param  string
      * @access public
      */
-    function Text_Statistics($block) 
+    function Text_Statistics($block)
     {
         $this->text = trim($block);
         $this->_analyze();
         $this->text = null;
     }
+
+
 
     /**
      * Returns the character frequencies.
@@ -136,6 +146,8 @@ class Text_Statistics
     function getCharFreq() {
         return $this->_charFreq;
     }
+
+
 
     /**
      * Returns the number of paragaphs.
@@ -150,12 +162,14 @@ class Text_Statistics
         return $this->_numParas;
     }
 
+
+
     /**
      * Compute statistics for the document object.
      *
      * @access protected
      */
-    function _analyze() 
+    function _analyze()
     {
         // char frequencies
         $this->_charFreq = count_chars($this->text);
@@ -181,10 +195,12 @@ class Text_Statistics
             }
             $this->_analyze_line($line);
         }
-        $this->flesch     = 206.835 - 
+        $this->flesch     = 206.835 -
             (1.015 * ($this->numWords/$this->numSentences)) -
             (84.6 * ($this->numSyllables/$this->numWords));
-    } 
+    }
+
+
 
     /**
      * Helper function, computes statistics on a given line.
@@ -192,7 +208,7 @@ class Text_Statistics
      * @param  string
      * @access protected
      */
-    function _analyze_line($line) 
+    function _analyze_line($line)
     {
         // expand abbreviations for counting syllables
         preg_match_all("/\b(\w[\w'-]*)\b/", $line, $words);
@@ -200,13 +216,13 @@ class Text_Statistics
             $w_obj = new Text_Word($word);
             $this->numSyllables += $w_obj->numSyllables();
             $this->numWords++;
-            if(!isset($this->_uniques[$word])) 
+            if(!isset($this->_uniques[$word])) {
                 $this->_uniques[$word] = 1;
             } else {
                $this->uniqWords++;
             }
         }
-        $this->numSentences += count($matches[0]);
+        $this->numSentences += count($words[0]);
     }
 }
 ?>
