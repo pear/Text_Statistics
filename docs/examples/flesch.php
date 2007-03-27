@@ -13,4 +13,5 @@ EOT;
 
 $block = new Text_Statistics($lorem);
 echo 'Flesch score: ' . $block->flesch . "\n";
+echo 'Flesch-Kincaid grade level: ' . $block->gradeLevel . "\n";
 ?>

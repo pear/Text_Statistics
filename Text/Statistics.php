@@ -61,7 +61,7 @@ class Text_Statistics
     /**
      * The number of syllables in the document.
      *
-     * @var number
+     * @var int
      * @access public
      */
     var $numSyllables = 0;
@@ -69,7 +69,7 @@ class Text_Statistics
     /**
      * The number of words in the document.
      *
-     * @var number
+     * @var int
      * @access public
      */
     var $numWords = 0;
@@ -77,7 +77,7 @@ class Text_Statistics
     /**
      * The number of unique words in the document.
      *
-     * @var    number
+     * @var    int
      * @access public
      */
     var $uniqWords = 0;
@@ -85,7 +85,7 @@ class Text_Statistics
     /**
      * The number of sentences in the document.
      *
-     * @var    number
+     * @var    int
      * @access public
      */
     var $numSentences = 0;
@@ -94,16 +94,25 @@ class Text_Statistics
      * The Flesch score of the document.
      * It is FALSE if there were no words in the document.
      *
-     * @var    number
+     * @var    float
      * @access public
      */
     var $flesch = 0;
 
     /**
-     * Some abbreviations we should expand.  THis list could/should
+     * Flesch-Kincaid grade level
+     * It is FALSE if there were no words in the document.
+     *
+     * @var    float
+     * @access public
+     */
+    var $gradeLevel = 0;
+
+    /**
+     * Some abbreviations we should expand.  This list could/should
      * be much larger.
      *
-     * @var    number
+     * @var    array
      * @access protected
      */
     var $_abbreviations = array('/Mr\./'   => 'Mister',
@@ -201,13 +210,20 @@ class Text_Statistics
             $this->numSentences = 1;
         }
         if ($this->numWords == 0) {
-            $this->flesch = false;
+            $this->flesch       = false;
+            $this->gradeLevel   = false;
             return;
         }
 
-        $this->flesch     = 206.835 -
-            (1.015 * ($this->numWords/$this->numSentences)) -
-            (84.6 * ($this->numSyllables/$this->numWords));
+        $wordsPerSent     = $this->numWords / $this->numSentences;
+        $syllablesPerWord = $this->numSyllables / $this->numWords;
+
+        $this->flesch = 206.835
+                        - 1.015 * $wordsPerSent
+                        - 84.6 * $syllablesPerWord;
+        $this->gradeLevel = 0.39 * $wordsPerSent
+                        + 11.8 * $syllablesPerWord
+                        - 15.59;
     }
 
 
