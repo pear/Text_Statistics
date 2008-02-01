@@ -248,7 +248,6 @@ class Text_Statistics
                $this->uniqWords++;
             }
         }
-        $this->numSentences += count($words[0]);
     }
 }
 ?>
