@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
-http://pear.php.net/dtd/tasks-1.0.xsd
-http://pear.php.net/dtd/package-2.0
-http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Text_Statistics</name>
  <channel>pear.php.net</channel>
  <summary>Compute readability indexes for documents.</summary>
- <description>
-  Text_Statistics allows for computation of readability indexes for
-  text documents.
- </description>
+ <description>Text_Statistics allows for computation of readability indexes for
+  text documents.</description>
  <lead>
   <name>George Schlossnagle</name>
   <user>gschlossnagle</user>
   <email>george@omniti.com</email>
   <active>yes</active>
  </lead>
- <date>2007-03-27</date>
- <time>15:35:02</time>
+ <date>2010-02-09</date>
+ <time>00:01:07</time>
  <version>
   <release>1.0.1</release>
   <api>1.0.1</api>
@@ -27,45 +22,33 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
-
  <notes>
-  * Fixed Bug #4492: Undefined index for each new word
-  * Fixed Bug #4490: Divide by zero error
-  * Implement request #4491: Add grade level
+* Fixed Bug #4492: Undefined index for each new word
+* Fixed Bug #4490: Divide by zero error
+* Implement request #4491: Add grade level
  </notes>
-
  <contents>
-  <dir name="/">
-   <dir name="docs">
-    <dir name="examples">
-     <file name="flesch.php" role="doc" />
-    </dir>
-   </dir>
-   <dir name="tests">
-    <file name="Statistics.phpt" role="test" />
-    <file name="Word.phpt" role="test" />
-   </dir>
-   <dir name="Text">
-    <file name="Statistics.php" role="php" />
-    <file name="Word.php" role="php" />
-   </dir>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="382c16207c9228cc31fbf0e4ba297bc1" name="docs/examples/flesch.php" role="doc" />
+   <file baseinstalldir="/" md5sum="05388d8cab332c2b1110e3631b3d8389" name="tests/AllTests.php" role="test" />
+   <file baseinstalldir="/" md5sum="eb89d8ac46ca7a02d1cb40090df288f2" name="tests/StatisticsTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="87195a635a49069c3f6913136b7edca0" name="tests/WordTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="6d25ebd51e61613ed6203486cc658906" name="Text/Statistics.php" role="php" />
+   <file baseinstalldir="/" md5sum="880f77f690fc92a2a14854fc2e6fb4d2" name="Text/Word.php" role="php" />
   </dir>
  </contents>
-
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>4.4.9</min>
    </php>
    <pearinstaller>
-    <min>1.4.0b1</min>
+    <min>1.5.6</min>
    </pearinstaller>
   </required>
  </dependencies>
-
  <phprelease />
  <changelog>
-
   <release>
    <version>
     <release>1.0</release>
@@ -78,9 +61,25 @@ http://pear.php.net/dtd/package-2.0.xsd">
    <date>2003-02-01</date>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    First release.
+First release.
    </notes>
   </release>
-
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-02-09</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+* Fixed Bug #4492: Undefined index for each new word
+* Fixed Bug #4490: Divide by zero error
+* Implement request #4491: Add grade level
+   </notes>
+  </release>
  </changelog>
 </package>
