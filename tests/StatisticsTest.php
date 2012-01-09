@@ -4,7 +4,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Text_StatisticsTest::main');
 }
 
-require_once 'PHPUnit/Framework.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 
 chdir(dirname(__FILE__) . '/../');
 require_once 'Text/Statistics.php';
