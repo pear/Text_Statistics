@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Text_Statistics": "./"
+            "Text": "./"
         }
     },
     "description": "Compute readability indexes for documents.",
