@@ -1,0 +1,31 @@
+{
+    "authors": [
+        {
+            "email": "george@omniti.com",
+            "name": "George Schlossnagle",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Text": "./"
+        }
+    },
+    "description": "Compute readability indexes for documents.",
+    "include-path": [
+        "./"
+    ],
+    "license": "PHP License",
+    "name": "pear/text_statistics",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Text_Statistics",
+        "source": "https://github.com/pear/Text_Statistics"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
